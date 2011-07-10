@@ -15,15 +15,15 @@ transaction & transaction::unserialize(std::istream & is)
     is.read((char *)&id, sizeof(id));
     is >> ch;
     while (ch != '\0') {
-	name.append(1, ch);
-	is >> ch;
+        name.append(1, ch);
+        is >> ch;
     }
     is.read((char *)&amount, sizeof(amount));
     is.read((char *)&when, sizeof(when));
     is >> ch;
     while (ch != '\0') {
-	comment.append(1, ch);
-	is >> ch;
+        comment.append(1, ch);
+        is >> ch;
     }    
     return *this;
 }

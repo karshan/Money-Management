@@ -17,9 +17,9 @@ class transaction
 public:
     transaction() {}
     transaction(std::string name, float amount):
-	name(name), amount(amount), when(time(NULL)) {}
+        name(name), amount(amount), when(time(NULL)) {}
     transaction(std::string name, float amount, time_t when):
-	name(name), amount(amount), when(when) {}
+        name(name), amount(amount), when(when) {}
     void serialize(std::ostream & os);
     transaction & unserialize(std::istream & is);
 };
