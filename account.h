@@ -14,6 +14,7 @@ class account
     std::vector<transaction> transactions;
     std::vector<unsigned int> free_ids; //for transactions, XXX use stack instead ?
 public:
+    account() {}
     account(std::string name): name(name) {}
 
     void add_transaction(transaction t); //XXX const transaction &t ??
@@ -24,6 +25,7 @@ public:
     //TODO: maybe a better interface for serialization ? return a char *
     //this will write a serialized form of an account to os...
     void serialize(std::ostream & os);
+    account & unserialize(std::istream & is);
 };
 
 #endif //_ACCOUNT_H

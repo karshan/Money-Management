@@ -43,3 +43,25 @@ void account::serialize(std::ostream & os)
     for (auto j = transactions.begin(); j != transactions.end(); j++)
 	(*j).serialize(os);
 }
+
+account & account::unserialize(std::istream & is)
+{
+    unsigned int size;
+    unsigned int free_id;
+    char ch;
+    is.read((char *)&size, sizeof(size));
+    for (unsigned int i = 0; i < size; i++) {
+	is.read((char *)&free_id, sizeof(free_id));
+	free_ids.push_back(free_id);
+    }
+    is.read((char *)&id, sizeof(id));
+    is >> ch;
+    while (ch != '\0') {
+	name.append(1, ch);
+	is >> ch;
+    }
+    is.read((char *)&size, sizeof(size));
+    for (unsigned int i = 0; i < size; i++)
+	transactions.push_back(transaction().unserialize(is));
+    return *this;
+}

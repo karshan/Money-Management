@@ -6,7 +6,7 @@ CXX = g++
 CC = g++
 endif
 
-CXXFLAGS = -g -std=gnu++0x
+CXXFLAGS = -g -Wall -std=gnu++0x
 
 OBJS = main.o file_bank.o bank.o account.o transaction.o
 

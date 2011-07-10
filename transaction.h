@@ -21,6 +21,7 @@ public:
     transaction(std::string name, float amount, time_t when):
 	name(name), amount(amount), when(when) {}
     void serialize(std::ostream & os);
+    transaction & unserialize(std::istream & is);
 };
 
 #endif //_TRANSACTION_H

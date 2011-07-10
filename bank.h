@@ -1,6 +1,7 @@
 #ifndef _BANK_H
 #define _BANK_H
 
+#include <iostream>
 #include <string>
 #include <vector>
 #include <exception>
@@ -28,6 +29,9 @@ public:
     bool delete_account(unsigned int id); //XXX or delete_account(account &) ?
 
     account & get_account(unsigned int id) throw(bad_id);
+
+    void serialize(std::ostream & os);
+    bank & unserialize(std::istream & is); //the return is just convenience
 
     virtual void save() = 0;
     virtual void load() = 0;

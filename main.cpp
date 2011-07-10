@@ -8,6 +8,5 @@ int main()
     account & myacc = mybank.get_account(
 	mybank.add_account(account(std::string("tcf"))));
     myacc.add_transaction(transaction(std::string("chipotle"), -6.5));
-    mybank.save();
     return 0;
 }

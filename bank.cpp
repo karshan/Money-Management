@@ -38,3 +38,35 @@ account & bank::get_account(unsigned int id) throw(bad_id)
     throw bad_id();
 }
 
+void bank::serialize(std::ostream & os)
+{
+    unsigned int tmp;
+    tmp = free_ids.size();
+    os.write((const char *)&tmp, sizeof(tmp));
+    for (auto it = free_ids.begin(); it != free_ids.end(); it++) {
+	tmp = *it;
+	os.write((const char *)&tmp, sizeof(tmp));
+	//TODO: would this work:
+	//os.write((const char *)&(*it), sizeof(*it)) ??
+	//or we could use operator[]... instead of using iterators
+    }
+    tmp = accounts.size();
+    os.write((const char *)&tmp, sizeof(tmp));
+    for (auto i = accounts.begin(); i != accounts.end(); i++)
+	(*i).serialize(os);
+}
+
+bank & bank::unserialize(std::istream & is)
+{
+    unsigned int size;
+    unsigned int id;
+    is.read((char *)&size, sizeof(size));
+    for (unsigned int i = 0; i < size; i++) {
+	is.read((char *)&id, sizeof(id));
+	free_ids.push_back(id);
+    }
+    is.read((char *)&size, sizeof(size));
+    for (unsigned int i = 0; i < size; i++)
+	accounts.push_back(account().unserialize(is));
+    return *this;
+}
