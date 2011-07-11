@@ -17,7 +17,7 @@ void account::add_transaction(transaction t)
 bool account::delete_transaction(unsigned int id)
 {
     for (auto it = transactions.begin();
-         it != transactions.end(); it++) {
+        it != transactions.end(); it++) {
         if ((*it).id == id) {
             transactions.erase(it);
             free_ids.push_back(id);
@@ -27,7 +27,7 @@ bool account::delete_transaction(unsigned int id)
     return false;
 }
 
-void account::serialize(std::ostream & os)
+void account::serialize(std::ostream & os) const
 {
     unsigned int tmp;
     tmp = free_ids.size();
@@ -49,6 +49,11 @@ account & account::unserialize(std::istream & is)
     unsigned int size;
     unsigned int free_id;
     char ch;
+    
+    free_ids.clear();
+    name.clear();
+    transactions.clear();
+
     is.read((char *)&size, sizeof(size));
     for (unsigned int i = 0; i < size; i++) {
         is.read((char *)&free_id, sizeof(free_id));

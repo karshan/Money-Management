@@ -13,7 +13,7 @@ void file_bank::save()
 {
     std::fstream file;
     file.exceptions(std::ofstream::failbit | std::ofstream::badbit);
-    file.open(name.c_str(), std::ios::out | std::ios::binary);
+    file.open(name.c_str(), std::ios::out | std::ios::binary | std::ios::trunc);
     serialize(file);
     file.close();
 }
@@ -21,7 +21,8 @@ void file_bank::save()
 void file_bank::load()
 {
     std::fstream file;
-    file.exceptions(std::ofstream::failbit | std::ofstream::badbit);
+    file.exceptions(std::ofstream::failbit | std::ofstream::badbit |
+                    std::ofstream::eofbit);
     file.open(name.c_str(), std::ios::in | std::ios::binary);
     unserialize(file);
     file.close();

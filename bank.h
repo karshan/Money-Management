@@ -9,9 +9,10 @@
 
 class bad_id : public std::exception
 {
+public:
     virtual const char * what() const throw()
     {
-        return "No Such Account";
+        return "no such account";
     }
 };
 
@@ -19,7 +20,6 @@ class bad_id : public std::exception
 //be accounts within this one.
 class bank
 {
-protected:
     std::vector<account> accounts;
     std::vector<unsigned int> free_ids; //for account, XXX use stack instead ?
 public:
@@ -28,9 +28,17 @@ public:
     //XXX use exceptions instead of bool here ?
     bool delete_account(unsigned int id); //XXX or delete_account(account &) ?
 
+    std::vector<account>::const_iterator accounts_begin() const {
+        return accounts.begin();
+    }
+    
+    std::vector<account>::const_iterator accounts_end() const {
+        return accounts.end();
+    }
+
     account & get_account(unsigned int id) throw(bad_id);
 
-    void serialize(std::ostream & os);
+    void serialize(std::ostream & os) const;
     bank & unserialize(std::istream & is); //the return is just convenience
 
     virtual void save() = 0;

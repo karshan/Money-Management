@@ -1,6 +1,6 @@
 #include "transaction.h"
 
-void transaction::serialize(std::ostream & os)
+void transaction::serialize(std::ostream & os) const
 {
     os.write((const char *)&id, sizeof(id));
     os.write(name.c_str(), name.size() + 1);

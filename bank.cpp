@@ -16,8 +16,9 @@ unsigned int bank::add_account(account a)
 
 bool bank::delete_account(unsigned int id)
 {
+    //XXX, how does auto know I want a const iterator or not ?
     for (auto it = accounts.begin();
-         it != accounts.end(); it++) {
+        it != accounts.end(); it++) {
         if ((*it).id == id) {
             accounts.erase(it);
             free_ids.push_back(id);
@@ -30,7 +31,7 @@ bool bank::delete_account(unsigned int id)
 account & bank::get_account(unsigned int id) throw(bad_id)
 {
     for (auto it = accounts.begin();
-         it != accounts.end(); it++) {
+        it != accounts.end(); it++) {
         if ((*it).id == id) {
             return *it;
         }
@@ -38,7 +39,7 @@ account & bank::get_account(unsigned int id) throw(bad_id)
     throw bad_id();
 }
 
-void bank::serialize(std::ostream & os)
+void bank::serialize(std::ostream & os) const
 {
     unsigned int tmp;
     tmp = free_ids.size();
@@ -60,6 +61,10 @@ bank & bank::unserialize(std::istream & is)
 {
     unsigned int size;
     unsigned int id;
+
+    free_ids.clear();
+    accounts.clear();
+
     is.read((char *)&size, sizeof(size));
     for (unsigned int i = 0; i < size; i++) {
         is.read((char *)&id, sizeof(id));
