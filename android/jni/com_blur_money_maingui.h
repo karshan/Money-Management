@@ -15,6 +15,14 @@ extern "C" {
 JNIEXPORT void JNICALL Java_com_blur_money_maingui_jni_1main
   (JNIEnv *, jobject);
 
+/*
+ * Class:     com_blur_money_maingui
+ * Method:    jni_notify_input
+ * Signature: (Ljava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_com_blur_money_maingui_jni_1notify_1input
+  (JNIEnv *, jobject, jstring);
+
 #ifdef __cplusplus
 }
 #endif
