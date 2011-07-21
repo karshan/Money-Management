@@ -6,9 +6,11 @@ CXX = g++
 CC = g++
 endif
 
-CXXFLAGS = -g -Wall -std=gnu++0x
+LOCAL_INCLUDES = -I../basic-framework/
 
-OBJS = moneycl.o file_bank.o bank.o account.o transaction.o
+CXXFLAGS = -g -Wall -std=gnu++0x $(LOCAL_INCLUDES)
+
+OBJS = moneycl.o ../basic-framework/libmoney.a
 
 EXES = moneycl
 
