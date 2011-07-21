@@ -1,7 +1,6 @@
 #ifndef _TRANSACTION_H
 #define _TRANSACTION_H
 
-#include <iostream>
 #include <string>
 #include <ctime>
 

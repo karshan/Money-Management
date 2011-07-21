@@ -31,6 +31,7 @@ int main()
                   << "5)delete account\n"
                   << "enter choice: ";
 
+        chc = 0;    //in case we get bad input default to exit
         std::cin >> chc;
 
         std::string acc;

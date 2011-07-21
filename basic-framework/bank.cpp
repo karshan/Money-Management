@@ -1,3 +1,4 @@
+#include <iostream>
 #include "bank.h"
 
 unsigned int bank::add_account(account a)
@@ -16,8 +17,7 @@ unsigned int bank::add_account(account a)
 
 bool bank::delete_account(unsigned int id)
 {
-    //XXX, how does auto know I want a const iterator or not ?
-    for (auto it = accounts.begin();
+    for (std::vector<account>::iterator it = accounts.begin();
         it != accounts.end(); it++) {
         if ((*it).id == id) {
             accounts.erase(it);
@@ -30,7 +30,7 @@ bool bank::delete_account(unsigned int id)
 
 account & bank::get_account(unsigned int id) throw(bad_id)
 {
-    for (auto it = accounts.begin();
+    for (std::vector<account>::iterator it = accounts.begin();
         it != accounts.end(); it++) {
         if ((*it).id == id) {
             return *it;
@@ -44,7 +44,7 @@ void bank::serialize(std::ostream & os) const
     unsigned int tmp;
     tmp = free_ids.size();
     os.write((const char *)&tmp, sizeof(tmp));
-    for (auto it = free_ids.begin(); it != free_ids.end(); it++) {
+    for (std::vector<unsigned int>::const_iterator it = free_ids.begin(); it != free_ids.end(); it++) {
         tmp = *it;
         os.write((const char *)&tmp, sizeof(tmp));
         //TODO: would this work:
@@ -53,7 +53,7 @@ void bank::serialize(std::ostream & os) const
     }
     tmp = accounts.size();
     os.write((const char *)&tmp, sizeof(tmp));
-    for (auto i = accounts.begin(); i != accounts.end(); i++)
+    for (std::vector<account>::const_iterator i = accounts.begin(); i != accounts.end(); i++)
         (*i).serialize(os);
 }
 

@@ -1,3 +1,4 @@
+#include <iostream>
 #include "transaction.h"
 
 void transaction::serialize(std::ostream & os) const

@@ -1,7 +1,6 @@
 #ifndef _BANK_H
 #define _BANK_H
 
-#include <iostream>
 #include <string>
 #include <vector>
 #include <exception>

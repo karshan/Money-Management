@@ -1,3 +1,4 @@
+#include <iostream>
 #include <ctime>
 #include "account.h"
 
@@ -16,7 +17,7 @@ void account::add_transaction(transaction t)
 
 bool account::delete_transaction(unsigned int id)
 {
-    for (auto it = transactions.begin();
+    for (std::vector<transaction>::iterator it = transactions.begin();
         it != transactions.end(); it++) {
         if ((*it).id == id) {
             transactions.erase(it);
@@ -32,7 +33,7 @@ void account::serialize(std::ostream & os) const
     unsigned int tmp;
     tmp = free_ids.size();
     os.write((const char *)&tmp, sizeof(tmp));
-    for (auto j = free_ids.begin(); j != free_ids.end(); j++) {
+    for (std::vector<unsigned int>::const_iterator j = free_ids.begin(); j != free_ids.end(); j++) {
         tmp = *j;
         os.write((const char *)&tmp, sizeof(tmp));
     }
@@ -40,7 +41,7 @@ void account::serialize(std::ostream & os) const
     os.write(name.c_str(), name.size() + 1);
     tmp = transactions.size();
     os.write((const char *)&tmp, sizeof(tmp));
-    for (auto j = transactions.begin(); j != transactions.end(); j++)
+    for (std::vector<transaction>::const_iterator j = transactions.begin(); j != transactions.end(); j++)
         (*j).serialize(os);
 }
 
