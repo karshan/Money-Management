@@ -24,7 +24,7 @@ transaction & transaction::unserialize(std::istream & is)
     while (ch != '\0') {
         comment.append(1, ch);
         is >> ch;
-    }    
+    }
     return *this;
 }
 

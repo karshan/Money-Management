@@ -24,14 +24,14 @@ class bank
     std::vector<unsigned int> free_ids; //for account, XXX use stack instead ?
 public:
     unsigned int add_account(account a);
-    
+
     //XXX use exceptions instead of bool here ?
     bool delete_account(unsigned int id); //XXX or delete_account(account &) ?
 
     std::vector<account>::const_iterator accounts_begin() const {
         return accounts.begin();
     }
-    
+
     std::vector<account>::const_iterator accounts_end() const {
         return accounts.end();
     }

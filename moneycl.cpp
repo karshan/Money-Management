@@ -32,7 +32,7 @@ int main()
                   << "enter choice: ";
 
         std::cin >> chc;
-        
+
         std::string acc;
         unsigned int id;
         switch(chc) {
@@ -88,7 +88,7 @@ void account_menu(account & acc)
                   << "enter choice: ";
 
         std::cin >> chc;
-        
+
         std::string name;
         float amt;
         unsigned int id;

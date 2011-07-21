@@ -14,15 +14,15 @@ public:
     float amount;
     time_t when;
     std::string comment;
-    
+
     transaction() {}
-    
+
     transaction(std::string name, float amount):
         name(name), amount(amount), when(time(NULL)) {}
-    
+
     transaction(std::string name, float amount, time_t when):
         name(name), amount(amount), when(when) {}
-    
+
     unsigned int get_id() const { return id; }
 
     void serialize(std::ostream & os) const;

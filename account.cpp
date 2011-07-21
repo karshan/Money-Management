@@ -49,7 +49,7 @@ account & account::unserialize(std::istream & is)
     unsigned int size;
     unsigned int free_id;
     char ch;
-    
+
     free_ids.clear();
     name.clear();
     transactions.clear();
