@@ -35,6 +35,25 @@ jboolean JNICALL Java_com_blur_money_file_1bank_load(JNIEnv *env, jobject thiz)
     return JNI_TRUE;
 }
 
+/*
+ * Class:     com_blur_money_file_bank
+ * Method:    save
+ * Signature: boolean save()
+ */
+jboolean Java_com_blur_money_file_1bank_save(JNIEnv *env, jobject thiz)
+{
+    //HACK we use the nptr int field in the java class to store a file_bank ptr =)
+    jint nptr = env->GetIntField(thiz, env->GetFieldID(env->GetObjectClass(thiz), "nptr", "I"));
+    file_bank *bank = (file_bank *)nptr;
+
+    try {
+        bank->save();
+    }
+    catch(...) {
+        return JNI_FALSE;
+    }
+    return JNI_TRUE;
+}
 
 /*
  * Class:     com.blur.money.file_bank
@@ -60,3 +79,21 @@ jobjectArray Java_com_blur_money_file_1bank_get_1accounts(JNIEnv *env, jobject t
 
     return jaccounts;
 }
+
+/*
+ * Class:     com_blur_money_file_bank
+ * Method:    add_account
+ * Signature: void add_account(String name)
+ */
+void Java_com_blur_money_file_1bank_add_1account
+(JNIEnv *env, jobject thiz, jstring jname)
+{
+     //HACK we use the nptr int field in the java class to store a file_bank ptr =)
+    jint nptr = env->GetIntField(thiz, env->GetFieldID(env->GetObjectClass(thiz), "nptr", "I"));
+    file_bank *bank = (file_bank *)nptr;
+
+    const char *jutf_name = env->GetStringUTFChars(jname, NULL);
+    bank->add_account(account(std::string(jutf_name)));
+    env->ReleaseStringUTFChars(jname, jutf_name);
+}
+

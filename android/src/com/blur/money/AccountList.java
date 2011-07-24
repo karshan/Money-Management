@@ -17,11 +17,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import android.content.Intent;
+import android.content.ComponentName;
 
 import com.blur.money.file_bank;
+import com.blur.money.file_bank_helper;
 
 public class AccountList extends ListActivity
 {
+    file_bank bank;
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -34,7 +38,15 @@ public class AccountList extends ListActivity
         // Handle item selection
         switch (item.getItemId()) {
         case R.id.new_account:
-            startActivity(new Intent(Intent.ACTION_INSERT, getIntent().getData()));
+            Intent intent = new Intent(Intent.ACTION_INSERT, getIntent().getData());
+            intent.setComponent(new ComponentName("com.blur.money", "com.blur.money.AddAccount"));
+            startActivity(new Intent(intent));
+            return true;
+        case R.id.save:
+            String out = "Saved";
+            if (bank.save() == false)
+                out = "Save Failed";
+            Toast.makeText(getApplicationContext(), out, Toast.LENGTH_SHORT).show();
             return true;
         default:
             return super.onOptionsItemSelected(item);
@@ -47,21 +59,27 @@ public class AccountList extends ListActivity
     {
         super.onCreate(savedInstanceState);
 
-        file_bank bank = new file_bank("/sdcard/data.bin");
-
+        bank = file_bank_helper.getInstance();
         if (bank.load() == false) {
-            //TODO: save() and launch AddAccount, or maybe a welcom ?
+            //TODO: save() and launch AddAccount, or maybe a welcome ?
             Toast.makeText(getApplicationContext(), "load failed", Toast.LENGTH_SHORT).show();
         }
-        String[] accounts = bank.get_accounts();
+    }
 
-        setListAdapter(new ArrayAdapter<String>(this, R.layout.list_item, accounts));
+    public void onResume()
+    {
+        super.onResume();
+
+        String[] accounts = bank.get_accounts();
+        setListAdapter(new ArrayAdapter<String>(this, R.layout.account_list_item, accounts));
         ListView lv = getListView();
         lv.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, 
                                     int position, long id) {
-                Toast.makeText(getApplicationContext(), ((TextView) view).getText(),
-                    Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Intent.ACTION_EDIT, getIntent().getData());
+                intent.setComponent(new ComponentName("com.blur.money", "com.blur.money.EditAccount"));
+                intent.putExtra("account_name", ((TextView) view).getText().toString());
+                startActivity(intent);
             }
         });
     }

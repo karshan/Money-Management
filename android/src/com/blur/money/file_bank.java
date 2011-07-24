@@ -10,7 +10,9 @@ public class file_bank
 
     public native int new_file_bank(String fname);
     public native boolean load();
+    public native boolean save();
     public native String[] get_accounts();
+    public native void add_account(String name);
 
     static {
         System.loadLibrary("money");

@@ -25,11 +25,27 @@ JNIEXPORT jboolean JNICALL Java_com_blur_money_file_1bank_load
 
 /*
  * Class:     com_blur_money_file_bank
+ * Method:    save
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_blur_money_file_1bank_save
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_blur_money_file_bank
  * Method:    get_accounts
  * Signature: ()[Ljava/lang/String;
  */
 JNIEXPORT jobjectArray JNICALL Java_com_blur_money_file_1bank_get_1accounts
   (JNIEnv *, jobject);
+
+/*
+ * Class:     com_blur_money_file_bank
+ * Method:    add_account
+ * Signature: (Ljava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_com_blur_money_file_1bank_add_1account
+  (JNIEnv *, jobject, jstring);
 
 #ifdef __cplusplus
 }

@@ -18,6 +18,13 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name="EditAccount">
+            <intent-filter>
+                <!-- TODO: better action name ? -->
+                <action android:name="android.intent.action.EDIT" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     </application>
 </manifest>
