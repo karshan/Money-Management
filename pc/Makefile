@@ -19,4 +19,4 @@ all: $(EXES)
 moneycl: $(OBJS)
 
 clean:
-	rm -f $(OBJS) $(EXES)
+	rm -f *.o $(EXES)

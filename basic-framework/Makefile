@@ -6,6 +6,8 @@
 # cross-compiler. You will need to change a lot of flags... so that it builds
 # with the gnustl_static library provided in the ndk. (make android ?)
 
+# TODO: Add .h dependencies...
+
 ifeq ($(CC),clang)
 CXX = clang
 LDFLAGS = -lstdc++

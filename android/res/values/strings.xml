@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">maingui</string>
+    <string name="app_name">Money</string>
+
+    <!-- since this is the launchable activity it is the app name in launcher... -->
+    <string name="title_account_list">Money</string>
+
+    <string name="new_account">New Account</string>
 </resources>

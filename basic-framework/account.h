@@ -22,13 +22,9 @@ public:
 
     unsigned int get_id() const { return id; }
 
-    std::vector<transaction>::const_iterator transactions_begin() const {
-        return transactions.begin();
+    const std::vector<transaction> & get_transactions() const {
+        return transactions;
     }
-    std::vector<transaction>::const_iterator transactions_end() const {
-        return transactions.end();
-    }
-
 
     //TODO: maybe a better interface for serialization ? return a char *i
 

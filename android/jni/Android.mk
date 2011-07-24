@@ -24,6 +24,6 @@ LOCAL_SRC_FILES := \
 ../../basic-framework/bank.cpp \
 ../../basic-framework/file_bank.cpp \
 ../../basic-framework/transaction.cpp \
-jni_main.cpp
+money.cpp
 
 include $(BUILD_SHARED_LIBRARY)

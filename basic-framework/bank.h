@@ -27,12 +27,8 @@ public:
     //XXX use exceptions instead of bool here ?
     bool delete_account(unsigned int id); //XXX or delete_account(account &) ?
 
-    std::vector<account>::const_iterator accounts_begin() const {
-        return accounts.begin();
-    }
-
-    std::vector<account>::const_iterator accounts_end() const {
-        return accounts.end();
+    const std::vector<account> & get_accounts() const {
+        return accounts;
     }
 
     account & get_account(unsigned int id) throw(bad_id);

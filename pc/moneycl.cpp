@@ -20,8 +20,10 @@ int main()
     do {
         std::cout << "Main Menu: (file: " << fname << ")\n"
                   << "accounts:\n\tid\tname\n";
-        for (std::vector<account>::const_iterator it = bank.accounts_begin();
-             it != bank.accounts_end(); it++)
+
+        const std::vector<account> accounts(bank.get_accounts());
+        for (std::vector<account>::const_iterator it = accounts.begin();
+             it != accounts.end(); it++)
             std::cout << "\t" << (*it).get_id() << "\t" << (*it).name << "\n";
         std::cout << "0)exit\n"
                   << "1)load\n"
@@ -79,8 +81,10 @@ void account_menu(account & acc)
     do {
         std::cout << "Account Menu: (account: " << acc.name << ")\n"
                   << "transactions:\n\tid\tname\tamount\ttime\n";
-        for (std::vector<transaction>::const_iterator it = acc.transactions_begin();
-             it != acc.transactions_end(); it++)
+
+        const std::vector<transaction> transactions(acc.get_transactions());
+        for (std::vector<transaction>::const_iterator it = transactions.begin();
+             it != transactions.end(); it++)
             std::cout << "\t" << (*it).get_id() << "\t" << (*it).name << "\t"
                       << (*it).amount << "\t" << ctime(&((*it).when)) << "\n";
         std::cout << "0)back\n"
