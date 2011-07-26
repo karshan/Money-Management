@@ -24,13 +24,15 @@ class bank
 public:
     unsigned int add_account(account a);
 
-    //XXX use exceptions instead of bool here ?
     bool delete_account(unsigned int id); //XXX or delete_account(account &) ?
 
     const std::vector<account> & get_accounts() const {
         return accounts;
     }
 
+    //This is utterly stupid...
+    //TODO: make this return a pointer, and NULL means error
+    //wtf exceptions!
     account & get_account(unsigned int id) throw(bad_id);
 
     void serialize(std::ostream & os) const;

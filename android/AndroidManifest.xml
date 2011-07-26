@@ -11,20 +11,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="AddAccount">
-            <intent-filter>
-                <!-- TODO: better action name ? -->
-                <action android:name="android.intent.action.INSERT" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity android:name="EditAccount">
-            <intent-filter>
-                <!-- TODO: better action name ? -->
-                <action android:name="android.intent.action.EDIT" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+        <activity android:name="AddAccount" />
+        <activity android:name="EditAccount" />
+        <activity android:name="AccountOverview" />
         <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     </application>
 </manifest>

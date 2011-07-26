@@ -1,31 +1,42 @@
 package com.blur.money;
 
-import android.app.Activity;
+import android.app.TabActivity;
 
 import android.os.Bundle;
 
 import android.widget.TextView;
+import android.widget.TabHost;
 
-import com.blur.money.file_bank;
-import com.blur.money.file_bank_helper;
+import android.view.View;
 
-public class EditAccount extends Activity
+import android.content.Intent;
+import android.content.ComponentName;
+
+//import com.blur.money.file_bank;
+//import com.blur.money.file_bank_helper;
+
+public class EditAccount extends TabActivity
 {
-    file_bank bank;
+//    file_bank bank;
+
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.edit_account);
 
-        Bundle extras = getIntent().getExtras();
-        String acc_name = extras.getString("account_name");
+        TabHost tabhost = getTabHost();
+        TabHost.TabSpec spec;
+        spec = tabhost.newTabSpec("overview").setIndicator("Overview");
+        spec.setContent(new Intent().setComponent(new ComponentName("com.blur.money", "com.blur.money.AccountOverview")).putExtras(getIntent().getExtras()));
 
-        bank = file_bank_helper.getInstance();
+        tabhost.addTab(spec);
 
-        TextView tv = new TextView(this);
-        tv.setText("EditAccount Activity\n" + acc_name);
+//        Bundle extras = getIntent().getExtras();
+//        String acc_name = extras.getString("account_name");
 
-        setContentView(tv);
+//        bank = file_bank_helper.getInstance();
+
     }
 }

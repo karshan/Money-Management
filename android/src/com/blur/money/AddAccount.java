@@ -11,7 +11,11 @@ import android.view.View.OnKeyListener;
 import android.widget.EditText;
 
 import com.blur.money.file_bank;
-import com.blur.money.file_bank_helper;
+import com.blur.money.cur_file_bank;
+
+//TODO: add more options in account creation like starting balance.
+//also don't save the new account when enter is pressed, have a save
+//button and a cancel button (right now the back button cancels)
 
 public class AddAccount extends Activity implements OnKeyListener
 {
@@ -23,7 +27,7 @@ public class AddAccount extends Activity implements OnKeyListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_account);
 
-        bank = file_bank_helper.getInstance();
+        bank = cur_file_bank.get();
 
         EditText name = (EditText)findViewById(R.id.name);
         name.setOnKeyListener(this);
@@ -33,7 +37,6 @@ public class AddAccount extends Activity implements OnKeyListener
         if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
             bank.add_account(((EditText)v).getText().toString());
             finish();
-//            ((EditText)v).setText("");
             return true;
         }
         return false;

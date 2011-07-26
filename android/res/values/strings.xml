@@ -7,4 +7,6 @@
 
     <string name="new_account">New Account</string>
     <string name="save">Save</string>
+
+    <string name="delete_account">Delete Account</string>
 </resources>
