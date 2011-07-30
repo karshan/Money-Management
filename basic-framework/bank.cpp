@@ -28,15 +28,15 @@ bool bank::delete_account(unsigned int id)
     return false;
 }
 
-account & bank::get_account(unsigned int id) throw(bad_id)
+account * bank::get_account(unsigned int id)
 {
     for (std::vector<account>::iterator it = accounts.begin();
         it != accounts.end(); it++) {
         if ((*it).id == id) {
-            return *it;
+            return &(*it);
         }
     }
-    throw bad_id();
+    return NULL;
 }
 
 void bank::serialize(std::ostream & os) const

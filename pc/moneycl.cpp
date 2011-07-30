@@ -6,7 +6,7 @@
 #include <ctime>
 #include "file_bank.h"
 
-void account_menu(account & acc);
+void account_menu(account * acc);
 
 //TODO: for now this is interactive, but later maybe add the LLVM commandline
 //arguments parser, and only run in interactive mode if -i was specified
@@ -37,6 +37,7 @@ int main()
         std::cin >> chc;
 
         std::string acc;
+        account *acct;
         unsigned int id;
         switch(chc) {
         case 0:
@@ -55,18 +56,17 @@ int main()
         case 4:
             std::cout << "enter account id: ";
             std::cin >> id;
-            try {
-                account_menu(bank.get_account(id));
+            if ((acct = bank.get_account(id)) == NULL) {
+                std::cout << "Failed! no such id" << "\n";
+                break;
             }
-            catch (bad_id & e) {
-                std::cout << e.what() << "\n";
-            }
+            account_menu(acct);
             break;
         case 5:
             std::cout << "enter account id: ";
             std::cin >> id;
             if (!bank.delete_account(id))
-                std::cout << "Failed! bad id\n";
+                std::cout << "Failed! no such id\n";
             break;
         default:
             std::cout << "bad choice\n";
@@ -75,14 +75,14 @@ int main()
     return 0;
 }
 
-void account_menu(account & acc)
+void account_menu(account * acc)
 {
     int chc;
     do {
-        std::cout << "Account Menu: (account: " << acc.name << ")\n"
+        std::cout << "Account Menu: (account: " << acc->name << ")\n"
                   << "transactions:\n\tid\tname\tamount\ttime\n";
 
-        const std::vector<transaction> transactions(acc.get_transactions());
+        const std::vector<transaction> transactions(acc->get_transactions());
         for (std::vector<transaction>::const_iterator it = transactions.begin();
              it != transactions.end(); it++)
             std::cout << "\t" << (*it).get_id() << "\t" << (*it).name << "\t"
@@ -105,12 +105,12 @@ void account_menu(account & acc)
             std::cin >> name;
             std::cout << "enter amount: ";
             std::cin >> amt;
-            acc.add_transaction(transaction(name, amt));
+            acc->add_transaction(transaction(name, amt));
             break;
         case 2:
             std::cout << "enter id: ";
             std::cin >> id;
-            if (!acc.delete_transaction(id))
+            if (!acc->delete_transaction(id))
                 std::cout << "Failed! no such id\n";
             break;
         default:

@@ -91,8 +91,7 @@ jobjectArray Java_com_blur_money_file_1bank_get_1accounts(JNIEnv *env, jobject t
 
     int i = 0; // Why do I have to do this ? g++ doesn't seem to be happy with this in the for loop initializer
     for (std::vector<account>::const_iterator it = accounts.begin(); it != accounts.end(); it++, i++) {
-        //this shouldn't thrown an exception, but after a TODO in there it won't throw exceptions anyways so this is OK
-        account *a = &bank->get_account((*it).get_id());    //the array returned contains references to the actual accounts
+        account *a = bank->get_account((*it).get_id());    //the array returned contains references to the actual accounts
         array_initer = env->NewObject(account_cls, env->GetMethodID(account_cls, "<init>", "(I)V"), (jint)a);
         env->SetObjectArrayElement(jaccounts, i, array_initer);
     }
@@ -133,14 +132,9 @@ jobject Java_com_blur_money_file_1bank_get_1account(JNIEnv *env, jobject thiz, j
 
     account *a = NULL;
 
-    //TODO: this should change when I mak get_account return a pointer and NULL means error
-    //it won't throw any exceptions then...
-    try {
-        a = &(bank->get_account((unsigned int)acc_id));
-    }
-    catch(...) {
+    a = bank->get_account((unsigned int)acc_id);
+    if (a == NULL)
         return (jobject)NULL;
-    }
 
     jclass account_cls = env->FindClass("com/blur/money/account");
     jobject jacc = env->NewObject(account_cls, env->GetMethodID(account_cls, "<init>", "(I)V"), (jint)a);

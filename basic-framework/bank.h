@@ -3,17 +3,7 @@
 
 #include <string>
 #include <vector>
-#include <exception>
 #include "account.h"
-
-class bad_id : public std::exception
-{
-public:
-    virtual const char * what() const throw()
-    {
-        return "no such account";
-    }
-};
 
 //This is a bank in the sense there's only one for a user, the actual banks will
 //be accounts within this one.
@@ -30,10 +20,7 @@ public:
         return accounts;
     }
 
-    //This is utterly stupid...
-    //TODO: make this return a pointer, and NULL means error
-    //wtf exceptions!
-    account & get_account(unsigned int id) throw(bad_id);
+    account *get_account(unsigned int id);
 
     void serialize(std::ostream & os) const;
     bank & unserialize(std::istream & is); //the return is just convenience
