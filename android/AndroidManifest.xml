@@ -14,6 +14,7 @@
         <activity android:name="AddAccount" />
         <activity android:name="EditAccount" />
         <activity android:name="AccountOverview" />
+        <activity android:name="EditTransaction" />
         <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     </application>
 </manifest>

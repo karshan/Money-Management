@@ -5,8 +5,17 @@
     <!-- since this is the launchable activity it is the app name in launcher... -->
     <string name="title_account_list">Money</string>
 
+    <!-- menu/account_menu.xml -->
     <string name="new_account">New Account</string>
     <string name="save">Save</string>
 
+    <!-- menu/account_list_context_menu.xml -->
     <string name="delete_account">Delete Account</string>
+
+    <!-- menu/account_overview_menu.xml -->
+    <string name="new_transaction">New Transaction</string>
+
+
+    <!-- menu/transaction_list_context_menu.xml -->
+    <string name="delete_transaction">Delete Transaction</string>
 </resources>

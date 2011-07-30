@@ -1,0 +1,2 @@
+-Free memory allocated in C/C++ (jni)
+-Move all string constants to a constant class (maybe res/values/strings) and use them from there (activity names etc.)

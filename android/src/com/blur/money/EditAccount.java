@@ -17,8 +17,6 @@ import android.content.ComponentName;
 
 public class EditAccount extends TabActivity
 {
-//    file_bank bank;
-
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -32,11 +30,5 @@ public class EditAccount extends TabActivity
         spec.setContent(new Intent().setComponent(new ComponentName("com.blur.money", "com.blur.money.AccountOverview")).putExtras(getIntent().getExtras()));
 
         tabhost.addTab(spec);
-
-//        Bundle extras = getIntent().getExtras();
-//        String acc_name = extras.getString("account_name");
-
-//        bank = file_bank_helper.getInstance();
-
     }
 }

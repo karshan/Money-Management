@@ -1,6 +1,8 @@
 #include "com_blur_money_file_bank.h"
 #include "file_bank.h"
 
+//TODO: freeing memory!
+
 /*
  * Class:     com_blur_money_file_bank
  * Method:    new_file_bank
@@ -71,14 +73,14 @@ jobjectArray Java_com_blur_money_file_1bank_get_1accounts(JNIEnv *env, jobject t
     const std::vector<account> accounts(bank->get_accounts());
 
     jclass account_cls = env->FindClass("com/blur/money/account");
-    array_initer = env->NewObject(account_cls, env->GetMethodID(account_cls, "<init>", "()V"));
+    array_initer = env->NewObject(account_cls, env->GetMethodID(account_cls, "<init>", "(I)V"), (jint)0);
     jobjectArray jaccounts = env->NewObjectArray(accounts.size(), account_cls, array_initer);
 
     int i = 0; // Why do I have to do this ? g++ doesn't seem to be happy with this in the for loop initializer
     for (std::vector<account>::const_iterator it = accounts.begin(); it != accounts.end(); it++, i++) {
-        array_initer = env->NewObject(account_cls, env->GetMethodID(account_cls, "<init>", "()V"));
-        account *a = new account(*it);
-        env->SetIntField(array_initer, env->GetFieldID(account_cls, "nptr", "I"), (jint)a);
+        //this shouldn't thrown an exception, but after a TODO in there it won't throw exceptions anyways so this is OK
+        account *a = &bank->get_account((*it).get_id());    //the array returned contains references to the actual accounts
+        array_initer = env->NewObject(account_cls, env->GetMethodID(account_cls, "<init>", "(I)V"), (jint)a);
         env->SetObjectArrayElement(jaccounts, i, array_initer);
     }
 
@@ -102,6 +104,9 @@ void Java_com_blur_money_file_1bank_add_1account
     env->ReleaseStringUTFChars(jname, jutf_name);
 }
 
+//This function is provided as compatibility with the C++ class
+//but the get_accounts() function actually returns an array of
+//references so this function is not really required...
 /*
  * Class:     com_blur_money_file_bank
  * Method:    get_account
@@ -114,19 +119,18 @@ jobject Java_com_blur_money_file_1bank_get_1account(JNIEnv *env, jobject thiz, j
     file_bank *bank = (file_bank *)nptr;
 
     account *a = NULL;
-    jclass account_cls = env->FindClass("com/blur/money/account");
-    jobject jacc = env->NewObject(account_cls, env->GetMethodID(account_cls, "<init>", "()V"));
 
     //TODO: this should change when I mak get_account return a pointer and NULL means error
     //it won't throw any exceptions then...
     try {
-        a = new account(bank->get_account((unsigned int)acc_id));
+        a = &(bank->get_account((unsigned int)acc_id));
     }
     catch(...) {
         return (jobject)NULL;
     }
 
-    env->SetIntField(jacc, env->GetFieldID(account_cls, "nptr", "I"), (jint)a);
+    jclass account_cls = env->FindClass("com/blur/money/account");
+    jobject jacc = env->NewObject(account_cls, env->GetMethodID(account_cls, "<init>", "(I)V"), (jint)a);
 
     return jacc;
 }

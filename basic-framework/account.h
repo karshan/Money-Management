@@ -20,6 +20,8 @@ public:
 
     bool delete_transaction(unsigned int id);
 
+    transaction *get_transaction(unsigned int id);
+
     unsigned int get_id() const { return id; }
 
     const std::vector<transaction> & get_transactions() const {

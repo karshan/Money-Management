@@ -4,7 +4,7 @@ import com.blur.money.account;
 
 public class file_bank
 {
-    int nptr; //HACK this is actuall a file_bank pointer (in C++)
+    int nptr; //HACK this is actually a file_bank pointer (in C++)
     public file_bank(String fname)
     {
         nptr = new_file_bank(fname);

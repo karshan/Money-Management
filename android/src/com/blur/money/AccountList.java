@@ -32,7 +32,8 @@ class AccountAdapterView extends TextView
 {
     public AccountAdapterView(Context c, account a) {
         super(c);
-        super.setText(a.get_name());
+        //TODO: better way of displaying an item...
+        super.setText("id: " + a.get_id() + "\nname: " + a.get_name());
         super.setPadding(20, 15, 20, 15);
     }
 }

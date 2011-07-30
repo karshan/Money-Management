@@ -28,6 +28,17 @@ bool account::delete_transaction(unsigned int id)
     return false;
 }
 
+transaction * account::get_transaction(unsigned int id)
+{
+    for (std::vector<transaction>::iterator it = transactions.begin();
+         it != transactions.end(); it++) {
+        if ((*it).id == id) {
+            return &(*it);
+        }
+    }
+    return NULL;
+}
+
 void account::serialize(std::ostream & os) const
 {
     unsigned int tmp;

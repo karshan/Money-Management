@@ -9,6 +9,22 @@ extern "C" {
 #endif
 /*
  * Class:     com_blur_money_transaction
+ * Method:    new_transaction
+ * Signature: (Ljava/lang/String;F)V
+ */
+JNIEXPORT void JNICALL Java_com_blur_money_transaction_new_1transaction__Ljava_lang_String_2F
+  (JNIEnv *, jobject, jstring, jfloat);
+
+/*
+ * Class:     com_blur_money_transaction
+ * Method:    new_transaction
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_com_blur_money_transaction_new_1transaction__
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_blur_money_transaction
  * Method:    get_name
  * Signature: ()Ljava/lang/String;
  */
@@ -22,6 +38,46 @@ JNIEXPORT jstring JNICALL Java_com_blur_money_transaction_get_1name
  */
 JNIEXPORT jint JNICALL Java_com_blur_money_transaction_get_1id
   (JNIEnv *, jobject);
+
+/*
+ * Class:     com_blur_money_transaction
+ * Method:    get_amount
+ * Signature: ()F
+ */
+JNIEXPORT jfloat JNICALL Java_com_blur_money_transaction_get_1amount
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_blur_money_transaction
+ * Method:    get_time
+ * Signature: ()Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_com_blur_money_transaction_get_1time
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_blur_money_transaction
+ * Method:    get_comment
+ * Signature: ()Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_com_blur_money_transaction_get_1comment
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_blur_money_transaction
+ * Method:    set_name
+ * Signature: (Ljava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_com_blur_money_transaction_set_1name
+  (JNIEnv *, jobject, jstring);
+
+/*
+ * Class:     com_blur_money_transaction
+ * Method:    set_amount
+ * Signature: (F)V
+ */
+JNIEXPORT void JNICALL Java_com_blur_money_transaction_set_1amount
+  (JNIEnv *, jobject, jfloat);
 
 #ifdef __cplusplus
 }

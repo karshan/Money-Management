@@ -39,6 +39,30 @@ JNIEXPORT jstring JNICALL Java_com_blur_money_account_get_1name
 JNIEXPORT jint JNICALL Java_com_blur_money_account_get_1id
   (JNIEnv *, jobject);
 
+/*
+ * Class:     com_blur_money_account
+ * Method:    delete_transaction
+ * Signature: (I)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_blur_money_account_delete_1transaction
+  (JNIEnv *, jobject, jint);
+
+/*
+ * Class:     com_blur_money_account
+ * Method:    add_transaction
+ * Signature: (Lcom/blur/money/transaction;)V
+ */
+JNIEXPORT void JNICALL Java_com_blur_money_account_add_1transaction
+  (JNIEnv *, jobject, jobject);
+
+/*
+ * Class:     com_blur_money_account
+ * Method:    get_transaction
+ * Signature: (I)Lcom/blur/money/transaction;
+ */
+JNIEXPORT jobject JNICALL Java_com_blur_money_account_get_1transaction
+  (JNIEnv *, jobject, jint);
+
 #ifdef __cplusplus
 }
 #endif

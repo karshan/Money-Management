@@ -9,15 +9,19 @@ public class account
         nptr = new_account(name);
     }
 
-    public account()
+    //for jni to create objects
+    private account(int i)
     {
-        nptr = 0;
+        nptr = i;
     }
 
     public native int new_account(String name);
     public native transaction[] get_transactions();
     public native String get_name();
     public native int get_id();
+    public native boolean delete_transaction(int id);
+    public native void add_transaction(transaction t);
+    public native transaction get_transaction(int id);
 
     static {
         System.loadLibrary("money");
