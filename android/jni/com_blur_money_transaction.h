@@ -25,6 +25,14 @@ JNIEXPORT void JNICALL Java_com_blur_money_transaction_new_1transaction__
 
 /*
  * Class:     com_blur_money_transaction
+ * Method:    del
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_com_blur_money_transaction_del
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_blur_money_transaction
  * Method:    get_name
  * Signature: ()Ljava/lang/String;
  */

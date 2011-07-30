@@ -190,5 +190,7 @@ public class AccountList extends ListActivity
         if (bank.save() == false)
             out = "Save Failed";
         Toast.makeText(getApplicationContext(), out, Toast.LENGTH_SHORT).show();
+
+        bank.del();
     }
 }

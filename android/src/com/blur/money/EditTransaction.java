@@ -49,6 +49,5 @@ public class EditTransaction extends Activity
             }
         });
     }
-
 }
 

@@ -2,8 +2,6 @@
 #include "account.h"
 #include "transaction.h"
 
-//TODO: freeing memory!
-
 /*
  * Class:     com_blur_money_transaction
  * Method:    new_transaction
@@ -29,6 +27,19 @@ void Java_com_blur_money_transaction_new_1transaction__(JNIEnv *env, jobject thi
     env->SetIntField(thiz, env->GetFieldID(env->GetObjectClass(thiz), "nptr", "I"), (jint)t);
 }
 
+/*
+ * Class:     com_blur_money_transaction
+ * Method:    del
+ * Signature: ()V
+ * Free's memory alloced by new_transaction
+ */
+void Java_com_blur_money_transaction_del(JNIEnv *env, jobject thiz)
+{
+    jint nptr = env->GetIntField(thiz, env->GetFieldID(env->GetObjectClass(thiz), "nptr", "I"));
+    transaction *t = (transaction *)nptr;
+    delete t;
+    env->SetIntField(thiz, env->GetFieldID(env->GetObjectClass(thiz), "nptr", "I"), (jint)0);
+}
 
 /*
  * Class:     com_blur_money_transaction

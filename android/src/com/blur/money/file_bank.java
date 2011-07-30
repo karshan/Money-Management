@@ -7,10 +7,14 @@ public class file_bank
     int nptr; //HACK this is actually a file_bank pointer (in C++)
     public file_bank(String fname)
     {
-        nptr = new_file_bank(fname);
+        new_file_bank(fname);
     }
 
-    public native int new_file_bank(String fname);
+    //This native constructor allocates a C++ file_bank and stores a pointer to it in nptr
+    //it must be free'd by calling del
+    public native void new_file_bank(String fname);
+    public native void del();
+
     public native boolean load();
     public native boolean save();
     public native account[] get_accounts();

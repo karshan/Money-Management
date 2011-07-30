@@ -1,21 +1,34 @@
 #include "com_blur_money_file_bank.h"
 #include "file_bank.h"
 
-//TODO: freeing memory!
-
 /*
  * Class:     com_blur_money_file_bank
  * Method:    new_file_bank
- * Signature: (Ljava/lang/String;)I
+ * Signature: (Ljava/lang/String;)V
  */
-jint Java_com_blur_money_file_1bank_new_1file_1bank
+void Java_com_blur_money_file_1bank_new_1file_1bank
 (JNIEnv *env, jobject thiz, jstring jfname)
 {
     const char *jutf_fname = env->GetStringUTFChars(jfname, NULL);
     file_bank *bank = new file_bank(std::string(jutf_fname));
     env->ReleaseStringUTFChars(jfname, jutf_fname);
-    return (jint)bank;
+    env->SetIntField(thiz, env->GetFieldID(env->GetObjectClass(thiz), "nptr", "I"), (jint)bank);
 }
+
+/*
+ * Class:     com_blur_money_file_bank
+ * Method:    del
+ * Signature: ()V
+ * Free's memory alloced in new_file_bank (java has no destructors)
+ */
+void Java_com_blur_money_file_1bank_del(JNIEnv *env, jobject thiz)
+{
+    jint nptr = env->GetIntField(thiz, env->GetFieldID(env->GetObjectClass(thiz), "nptr", "I"));
+    file_bank *bank = (file_bank *)nptr;
+    delete bank;
+    env->SetIntField(thiz, env->GetFieldID(env->GetObjectClass(thiz), "nptr", "I"), (jint)0);
+}
+
 
 /*
  * Class:     com_blur_money_file_bank

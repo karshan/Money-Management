@@ -10,10 +10,18 @@ extern "C" {
 /*
  * Class:     com_blur_money_file_bank
  * Method:    new_file_bank
- * Signature: (Ljava/lang/String;)I
+ * Signature: (Ljava/lang/String;)V
  */
-JNIEXPORT jint JNICALL Java_com_blur_money_file_1bank_new_1file_1bank
+JNIEXPORT void JNICALL Java_com_blur_money_file_1bank_new_1file_1bank
   (JNIEnv *, jobject, jstring);
+
+/*
+ * Class:     com_blur_money_file_bank
+ * Method:    del
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_com_blur_money_file_1bank_del
+  (JNIEnv *, jobject);
 
 /*
  * Class:     com_blur_money_file_bank

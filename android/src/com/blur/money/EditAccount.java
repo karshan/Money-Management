@@ -26,9 +26,12 @@ public class EditAccount extends TabActivity
 
         TabHost tabhost = getTabHost();
         TabHost.TabSpec spec;
-        spec = tabhost.newTabSpec("overview").setIndicator("Overview");
-        spec.setContent(new Intent().setComponent(new ComponentName("com.blur.money", "com.blur.money.AccountOverview")).putExtras(getIntent().getExtras()));
+        spec = tabhost.newTabSpec("transaction_list").setIndicator("Transaction List");
+        spec.setContent(new Intent().setComponent(new ComponentName("com.blur.money", "com.blur.money.TransactionList")).putExtras(getIntent().getExtras()));
+        tabhost.addTab(spec);
 
+        spec = tabhost.newTabSpec("account_overview").setIndicator("Overview");
+        spec.setContent(new Intent().setComponent(new ComponentName("com.blur.money", "com.blur.money.AccountOverview")).putExtras(getIntent().getExtras()));
         tabhost.addTab(spec);
     }
 }

@@ -53,12 +53,13 @@ public class transaction implements Parcelable {
         new_transaction();
     }
 
+    //These native constructors allocate a C++ transaction and store a pointer to it in nptr
+    //it must be free'd by calling del
     //TODO: how do we pass in the time...
     //public native void new_transaction(String name, float amount, long when)
-
     public native void new_transaction(String name, float amount);
-
     public native void new_transaction();
+    public native void del();
 
     public native String get_name();
     public native int get_id();
