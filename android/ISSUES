@@ -1,0 +1,1 @@
+-If the native pointer size is not the same as a Java int everything is screwed. (but I don't know of any 64-bit arm systems so we're good for now)
