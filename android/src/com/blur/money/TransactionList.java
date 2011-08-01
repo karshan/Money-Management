@@ -1,5 +1,9 @@
 package com.blur.money;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.text.DateFormat;
+
 import android.app.ListActivity;
 
 import android.os.Bundle;
@@ -34,7 +38,8 @@ class TransactionAdapterView extends TextView
     public TransactionAdapterView(Context c, transaction t) {
         super(c);
         super.setText("id: " + t.get_id() + "\nname: " + t.get_name() +
-                        "\namount: " + t.get_amount() + "\ntime: " + t.get_time());
+                        "\namount: " + t.get_amount() + "\ntime: " +
+                        DateFormat.getInstance().format(new Date(t.get_when())));
         super.setPadding(20, 15, 20, 15);
     }
 }
@@ -125,7 +130,7 @@ public class TransactionList extends ListActivity
         // Handle item selection
         switch (item.getItemId()) {
         case R.id.new_transaction:
-            transaction t = new transaction("", 0);
+            transaction t = new transaction("", 0, Calendar.getInstance().getTimeInMillis());
             Intent intent = new Intent();
             intent.setComponent(new ComponentName("com.blur.money", "com.blur.money.EditTransaction"));
             intent.putExtra("transaction", t);

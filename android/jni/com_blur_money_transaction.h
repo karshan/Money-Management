@@ -10,6 +10,14 @@ extern "C" {
 /*
  * Class:     com_blur_money_transaction
  * Method:    new_transaction
+ * Signature: (Ljava/lang/String;FJ)V
+ */
+JNIEXPORT void JNICALL Java_com_blur_money_transaction_new_1transaction__Ljava_lang_String_2FJ
+  (JNIEnv *, jobject, jstring, jfloat, jlong);
+
+/*
+ * Class:     com_blur_money_transaction
+ * Method:    new_transaction
  * Signature: (Ljava/lang/String;F)V
  */
 JNIEXPORT void JNICALL Java_com_blur_money_transaction_new_1transaction__Ljava_lang_String_2F
@@ -57,10 +65,10 @@ JNIEXPORT jfloat JNICALL Java_com_blur_money_transaction_get_1amount
 
 /*
  * Class:     com_blur_money_transaction
- * Method:    get_time
- * Signature: ()Ljava/lang/String;
+ * Method:    get_when
+ * Signature: ()J
  */
-JNIEXPORT jstring JNICALL Java_com_blur_money_transaction_get_1time
+JNIEXPORT jlong JNICALL Java_com_blur_money_transaction_get_1when
   (JNIEnv *, jobject);
 
 /*
@@ -86,6 +94,14 @@ JNIEXPORT void JNICALL Java_com_blur_money_transaction_set_1name
  */
 JNIEXPORT void JNICALL Java_com_blur_money_transaction_set_1amount
   (JNIEnv *, jobject, jfloat);
+
+/*
+ * Class:     com_blur_money_transaction
+ * Method:    set_when
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_blur_money_transaction_set_1when
+  (JNIEnv *, jobject, jlong);
 
 #ifdef __cplusplus
 }

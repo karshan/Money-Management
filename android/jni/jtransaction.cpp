@@ -5,6 +5,20 @@
 /*
  * Class:     com_blur_money_transaction
  * Method:    new_transaction
+ * Signature: (Ljava/lang/String;FJ)V
+ */
+void Java_com_blur_money_transaction_new_1transaction__Ljava_lang_String_2FJ
+(JNIEnv *env, jobject thiz, jstring jname, jfloat jamt, jlong jwhen)
+{
+    const char *name = env->GetStringUTFChars(jname, NULL);
+    transaction *t = new transaction(std::string(name), (float)jamt, (time_t)(jwhen/1000LL));
+    env->SetIntField(thiz, env->GetFieldID(env->GetObjectClass(thiz), "nptr", "I"), (jint)t);
+    env->ReleaseStringUTFChars(jname, name);
+}
+
+/*
+ * Class:     com_blur_money_transaction
+ * Method:    new_transaction
  * Signature: (Ljava/lang/String;F)V
  */
 void Java_com_blur_money_transaction_new_1transaction__Ljava_lang_String_2F
@@ -82,15 +96,15 @@ jfloat Java_com_blur_money_transaction_get_1amount(JNIEnv *env, jobject thiz)
 
 /*
  * Class:     com_blur_money_transaction
- * Method:    get_time
- * Signature: ()Ljava/lang/String;
+ * Method:    get_when
+ * Signature: ()J
  */
-jstring Java_com_blur_money_transaction_get_1time(JNIEnv *env, jobject thiz)
+jlong Java_com_blur_money_transaction_get_1when(JNIEnv *env, jobject thiz)
 {
     //HACK we use the nptr int field in the java class to store a file_bank ptr =)
     jint nptr = env->GetIntField(thiz, env->GetFieldID(env->GetObjectClass(thiz), "nptr", "I"));
     transaction *t = (transaction *)nptr;
-    return env->NewStringUTF(ctime(&t->when));
+    return (jlong)((long long)t->when*1000LL);
 }
 
 /*
@@ -132,4 +146,17 @@ void Java_com_blur_money_transaction_set_1amount
     jint nptr = env->GetIntField(thiz, env->GetFieldID(env->GetObjectClass(thiz), "nptr", "I"));
     transaction *t = (transaction *)nptr;
     t->amount = amt;
+}
+
+/*
+ * Class:     com_blur_money_transaction
+ * Method:    set_when
+ * Signature: (J)V
+ */
+void Java_com_blur_money_transaction_set_1when
+(JNIEnv *env, jobject thiz, jlong jwhen)
+{
+    jint nptr = env->GetIntField(thiz, env->GetFieldID(env->GetObjectClass(thiz), "nptr", "I"));
+    transaction *t = (transaction *)nptr;
+    t->when = (time_t)(jwhen/1000LL);
 }

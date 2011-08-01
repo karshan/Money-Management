@@ -42,8 +42,9 @@ public class transaction implements Parcelable {
         nptr = i;
     }
 
-    //All constructors here should mimic those in the C++ class
-    //TODO: public transaction(String name, float amount, long when)
+    public transaction(String name, float amount, long when) {
+        new_transaction(name, amount, when);
+    }
 
     public transaction(String name, float amount) {
         new_transaction(name, amount);
@@ -55,8 +56,7 @@ public class transaction implements Parcelable {
 
     //These native constructors allocate a C++ transaction and store a pointer to it in nptr
     //it must be free'd by calling del
-    //TODO: how do we pass in the time...
-    //public native void new_transaction(String name, float amount, long when)
+    public native void new_transaction(String name, float amount, long when);
     public native void new_transaction(String name, float amount);
     public native void new_transaction();
     public native void del();
@@ -64,11 +64,11 @@ public class transaction implements Parcelable {
     public native String get_name();
     public native int get_id();
     public native float get_amount();
-    //TODO: better way to pass around time...
-    public native String get_time();
+    public native long get_when();
     public native String get_comment();
 
     //TODO: set_ functions for all public fields in the C++ class
     public native void set_name(String name);
     public native void set_amount(float amt);
+    public native void set_when(long time);
 }
