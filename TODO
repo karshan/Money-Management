@@ -1,0 +1,14 @@
+Basic Framework:
+    -Network/Server backed bank implementation
+    -Partial load/save interface
+    -Bank diff class
+    -Sqlite/Somedb backed bank (to allow for queries)
+
+Android:
+    -Move all string constants to a constant class (maybe res/values/strings)
+         and use them from there (activity names etc.)
+    -Better list entries
+    -Non tab-layout EditAccount, embed list in middle show balance on top
+    -seperate file_bank and bank in jni, to mimic the C++ class tree in java
+    -change the file used /sdcard/data.bin is nonsense
+    -Do @Override annotations where there missing

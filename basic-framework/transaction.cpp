@@ -21,10 +21,10 @@ transaction & transaction::unserialize(std::istream & is)
     }
     is.read((char *)&amount, sizeof(amount));
     is.read((char *)&when, sizeof(when));
-    is >> ch;
+    is.get(ch);
     while (ch != '\0') {
         comment.append(1, ch);
-        is >> ch;
+        is.get(ch);
     }
     return *this;
 }

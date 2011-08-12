@@ -49,8 +49,9 @@ int main()
             bank.save();
             break;
         case 3:
+            std::cin.ignore();
             std::cout << "enter account name: ";
-            std::cin >> acc;
+            getline(std::cin, acc);
             bank.add_account(account(acc));
             break;
         case 4:

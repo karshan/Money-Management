@@ -72,10 +72,10 @@ account & account::unserialize(std::istream & is)
         free_ids.push_back(free_id);
     }
     is.read((char *)&id, sizeof(id));
-    is >> ch;
+    is.get(ch);
     while (ch != '\0') {
         name.append(1, ch);
-        is >> ch;
+        is.get(ch);
     }
     is.read((char *)&size, sizeof(size));
     for (unsigned int i = 0; i < size; i++)

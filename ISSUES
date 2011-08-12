@@ -1,2 +1,4 @@
+Android:
 -If the native pointer size is not the same as a Java int everything is screwed. (but I don't know of any 64-bit arm systems so we're good for now)
 -we assume time_t is a c long, and java's getTimeInMillis is assumed to be a c long long = time_t*1000 if any of this is incorrect all timing will die
+-name's don't handle spaces.

@@ -16,7 +16,7 @@
         android:layout_height="wrap_content" 
         android:text="Amount" />
     <EditText android:id="@+id/amount"
-        android:maxLength="100"
+        android:maxLength="20"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
     <TextView android:id="@+id/date_text"

@@ -2,7 +2,7 @@
 # android build sytem uses the sources in this directory directly without 
 # this makefile
 
-# TODO: Add support for building an arm libmoney.a using android's 
+# TODO: Add support for building an arm libmoney.so using android's
 # cross-compiler. You will need to change a lot of flags... so that it builds
 # with the gnustl_static library provided in the ndk. (make android ?)
 

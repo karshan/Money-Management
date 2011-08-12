@@ -7,8 +7,9 @@
 //TODO:more innovative naming =)
 class file_bank : public bank
 {
-    std::string name;
+    std::string name; //TODO:rename this to fname
 public:
+    file_bank(const file_bank & rhs): bank(rhs) {}
     file_bank(std::string filename): name(filename) {}
     virtual void save();
     virtual void load();
