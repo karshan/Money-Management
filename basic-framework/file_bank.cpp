@@ -1,4 +1,5 @@
 #include <ctime>
+#include <inttypes.h>
 #include "file_bank.h"
 
 //This implements a bank whose backing store is a plain binary file. it sucks
@@ -11,9 +12,16 @@
 
 void file_bank::save()
 {
+    uint32_t tmp;
     std::fstream file;
     file.exceptions(std::ofstream::failbit | std::ofstream::badbit);
     file.open(name.c_str(), std::ios::out | std::ios::binary | std::ios::trunc);
+
+    tmp = magic;
+    file.write((const char *)&tmp, sizeof(tmp));
+    tmp = version;
+    file.write((const char *)&tmp, sizeof(tmp));
+
     serialize(file);
     file.close();
 }
@@ -24,6 +32,7 @@ void file_bank::load()
     file.exceptions(std::ofstream::failbit | std::ofstream::badbit |
                     std::ofstream::eofbit);
     file.open(name.c_str(), std::ios::in | std::ios::binary);
+
     unserialize(file);
     file.close();
 }

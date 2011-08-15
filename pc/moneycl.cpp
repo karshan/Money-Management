@@ -81,13 +81,14 @@ void account_menu(account * acc)
     int chc;
     do {
         std::cout << "Account Menu: (account: " << acc->name << ")\n"
-                  << "transactions:\n\tid\tname\tamount\ttime\n";
+                  << "transactions:\n\tid\tname\tamount\ttime\tcategory\tcomment\n";
 
         const std::vector<transaction> transactions(acc->get_transactions());
         for (std::vector<transaction>::const_iterator it = transactions.begin();
              it != transactions.end(); it++)
             std::cout << "\t" << (*it).get_id() << "\t" << (*it).name << "\t"
-                      << (*it).amount << "\t" << ctime(&((*it).when)) << "\n";
+                      << (*it).amount << "\t" << ctime(&((*it).when)) << "\t"
+                      << (*it).category << "\t" << (*it).comment << "\n";
         std::cout << "0)back\n"
                   << "1)add transaction\n"
                   << "2)delete transaction\n"

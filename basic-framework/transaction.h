@@ -12,6 +12,7 @@ public:
     std::string name;
     float amount;
     time_t when;
+    std::string category;
     std::string comment;
 
     transaction() {}
