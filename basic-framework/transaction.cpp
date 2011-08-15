@@ -25,6 +25,13 @@ transaction & transaction::unserialize(std::istream & is)
     }
     is.read((char *)&amount, sizeof(amount));
     is.read((char *)&when, sizeof(when));
+
+    is.get(ch);
+    while (ch != '\0') {
+        category.append(1, ch);
+        is.get(ch);
+    }
+
     is.get(ch);
     while (ch != '\0') {
         comment.append(1, ch);

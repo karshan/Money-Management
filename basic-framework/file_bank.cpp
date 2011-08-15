@@ -28,10 +28,18 @@ void file_bank::save()
 
 void file_bank::load()
 {
+    uint32_t tmp;
     std::fstream file;
     file.exceptions(std::ofstream::failbit | std::ofstream::badbit |
                     std::ofstream::eofbit);
     file.open(name.c_str(), std::ios::in | std::ios::binary);
+
+    file.read((char*)&tmp, sizeof(tmp));
+    if (tmp != magic)
+        throw std::exception(); // TODO: throw a meaningful exception
+    file.read((char*)&tmp, sizeof(tmp));
+    if (tmp != version)
+        throw std::exception(); // here too
 
     unserialize(file);
     file.close();
